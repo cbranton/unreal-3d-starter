@@ -1,3 +1,6 @@
+# .gitignore for Unreal projects
+# Allows for project folders not in the root of the repo
+
 # Visual Studio 2015 user specific files
 .vs/
 
