@@ -1,4 +1,8 @@
 # export_assets.py
+"""
+Simple script to export a static mesh to FBX
+Note: these are assets selected in the Content window, not the scene.
+"""
 
 import unreal
 
@@ -26,12 +30,15 @@ def exportSelectedAssets():
         export_task.options = unreal.FbxExportOption()
         export_task.prompt = False
 
+        if isinstance(asset, unreal.StaticMesh):
+            # create class specific exporter
+            fbx_exporter = unreal.StaticMeshExporterFBX()
+            export_task.exporter = fbx_exporter
+            fbx_exporter.run_asset_export_task(export_task)
+        # TODO: can set up elifs for other types
+        # would need to adjust export task filenames and options
 
-        # create class specific exporter
-        fbx_exporter = unreal.StaticMeshExporterFBX()
-        export_task.exporter = fbx_exporter
-        fbx_exporter.run_asset_export_task(export_task)
-        print ("Export complete")
+    print ("Export complete")
 
 print ("hello again")
 exportSelectedAssets()
